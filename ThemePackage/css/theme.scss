@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+//全局设置
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Microsoft YaHei", "微软雅黑";
+
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+
+}
+
+//主框
+.main {
+  width: 100%;
+//  max-width: 1080px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.header{
+  width: 100%;
+  height: 90px;
+}
+.search{
+  width: 100%;
+  height: 100px;
+  background: #f3f3f3;
+  .search_input{
+    width: 94%;
+    height: 60px;
+    margin:20px 3%;
+    background: #d2d2d2;
+    border-radius: 10px;
+    position: absolute;
+    input{
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      border: 0;
+      background: transparent;
+      text-indent: 40px;
+      color: #afafaf;
+      text-align: left;
+    }
+  }
+
+  .search_text{
+    width:260px;
+    height: 60px;
+    position: absolute;
+    margin: 20px auto;
+    left:0;
+    right: 0;
+    z-index: 100;
+    img{
+      height: 30px;
+      margin: 15px 0;
+      float: left;
+    }
+    h2{
+      width: 200px;
+      height: 60px;
+      line-height: 60px;
+      float: left;
+      margin-left: 20px;
+      color: #afafaf;
+    }
+  }
+}
+
+.themeswiper {
+  width: 100%;
+  height:auto;
+  background-size: 100% 100%;
+  background-position: center center;
+  margin-top: 20px;
+}
+
+.themepic {
+  float:left;
+  width: 100%;
+  height:auto;
+  margin: 20px auto;
+  img{display:block;width:100%;height:auto;}
+}
+.themelist{
+  width: 100%;
+
+}
+.themeli {
+  width: 100%;
+  height:auto;
+  margin-bottom:30px;
+  padding:20px 0;
+  background: #f3f3f3;
+  overflow:hidden;
+  .listleft {
+    float:left;
+    width:35%;
+    .listtitle{
+      margin:20px 0 20px;
+      padding-left:20px;
+      font-size:28px;
+      height:50px;
+      color:#242424;
+      overflow:hidden;
+    }
+    .listcon{
+      padding-left:20px;
+      font-size:24px;
+      max-height:108px;
+      line-height: 36px;
+      color:#b3b2b2;
+      overflow:hidden;
+      text-justify: auto;
+    }
+  }
+  .listpic {
+    width:35%;
+    float:left;
+    .propic{margin:0 30px;display:block;width:100%;height:auto;}
+  }
+  .listprice {
+    width:30%;
+    float:left;
+    .listnum{
+      width:100%;
+      color:#242424;
+      text-align:center;
+      margin-top:50px;
+      .f20{font-size:20px;}
+      .f36{font-size:40px;}
+    }
+    .listbtn{
+      width:100%;
+      height:100px;
+      border-radius:5px;
+      align-content:center;
+      .button{
+        width:70%;
+        height:40px;
+        line-height:40px;
+        border-radius:10px;
+        background-color:#e6e146;
+        font-size:20px;
+        color:#242424;
+        text-align:center;
+        margin:20px auto;
+
+      }
+    }
+  }
+
+}

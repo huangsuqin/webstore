@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>主题套餐</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="title" content=""/>
+    <meta content="telephone=no,email=no,address=no" name="format-detection"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui"/>
+
+    <!--开始css引入-->
+    <script src="../common-assets/js/flexible.js"></script>
+    <script src="../common-assets/js/flexible_css.js"></script>
+    <!--本页专用样式-->
+    <link rel="stylesheet" href="css/theme.css"/>
+
+    <!--引入jq库文件-->
+    <script src="../common-assets/js/jquery-2.2.3.min.js"></script>
+    <!--引入js文件结束-->
+    <style type="text/css" media="all">
+
+
+        /**
+         *
+         * Pull down styles
+         *
+         */
+        #pullDown, #pullUp {
+            background: #fff;
+            height: 40px;
+            line-height: 40px;
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+            font-weight: bold;
+            font-size: 14px;
+            color: #888;
+        }
+
+        #pullDown .pullDownIcon, #pullUp .pullUpIcon {
+            display: block;
+            float: left;
+            width: 40px;
+            height: 40px;
+            background: url('../common-assets/iscroll/pull.png') 0 0 no-repeat;
+            -webkit-background-size: 40px 80px;
+            background-size: 40px 80px;
+            -webkit-transition-property: -webkit-transform;
+            -webkit-transition-duration: 250ms;
+        }
+
+        #pullDown .pullDownIcon {
+            -webkit-transform: rotate(0deg) translateZ(0);
+        }
+
+        #pullUp .pullUpIcon {
+            -webkit-transform: rotate(-180deg) translateZ(0);
+        }
+
+        #pullDown.flip .pullDownIcon {
+            -webkit-transform: rotate(-180deg) translateZ(0);
+        }
+
+        #pullUp.flip .pullUpIcon {
+            -webkit-transform: rotate(0deg) translateZ(0);
+        }
+
+        #pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+            background-position: 0 100%;
+            -webkit-transform: rotate(0deg) translateZ(0);
+            -webkit-transition-duration: 0ms;
+
+            -webkit-animation-name: loading;
+            -webkit-animation-duration: 2s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+        }
+
+        @-webkit-keyframes loading {
+            from {
+                -webkit-transform: rotate(0deg) translateZ(0);
+            }
+            to {
+                -webkit-transform: rotate(360deg) translateZ(0);
+            }
+        }
+
+    </style>
+</head>
+<body style="font-size:12px;">
+
+<div class="main">
+
+    <div class="header"></div>
+
+    <div class="search">
+        <div class="search_text">
+            <img src="images/search.png">
+            <h2>搜索您想要的商品</h2>
+        </div>
+        <div class="search_input">
+            <input type="text">
+        </div>
+
+
+
+    </div>
+    <!--图片1开始-->
+    <div class="themepic">
+        <a href="#"><img src="images/mooncakes.png"/></a>
+    </div>
+    <!--图片1结束-->
+    <!--图片2开始-->
+    <div class="themepic">
+        <a href="#"><img src="images/fruits.png"/></a>
+    </div>
+    <!--图片2结束-->
+
+    <!--列表开始-->
+    <div class="themelist" id="wrapper">
+        <div id="scroller">
+            <div id="pullDown">
+                <span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新</span>
+            </div>
+            <ul>
+                <li>
+                    <!--循环 start *4-->
+                    <div class="themeli">
+                        <div class="listleft">
+                            <div class="listtitle">
+                                生日礼盒套装9个字
+                            </div>
+                            <div class="listcon">
+                                重磅水果大派对，一定让TA的生日缤纷难忘
+                            </div>
+                        </div>
+                        <div class="listpic">
+                            <a href=""><img class="propic" src="images/product.png" /></a>
+                        </div>
+                        <div class="listprice">
+                            <div class="listnum"><span class="f20">&yen;</span><span class="f36">588</span><span class="f20">/套</span></div>
+                            <div class="listbtn"><div  class="button">加入购物车</div></div>
+                        </div>
+                    </div>
+                    <!--循环 end-->
+
+                </li>
+            </ul>
+            <div id="pullUp">
+                <span class="pullUpIcon"></span><span class="pullUpLabel">上拉加载</span>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!--列表结束-->
+
+
+</div>
+<script src="../common-assets/iscroll/iscroll.js"></script>
+
+<script type="text/javascript">
+    var myScroll,
+            pullDownEl, pullDownOffset,
+            pullUpEl, pullUpOffset,
+            generatedCount = 0;
+
+    function loaded() {
+        pullDownEl = document.getElementById('pullDown');
+        pullDownOffset = pullDownEl.offsetHeight;
+        pullUpEl = document.getElementById('pullUp');
+        pullUpOffset = pullUpEl.offsetHeight;
+
+        myScroll = new iScroll('wrapper', {
+            useTransition: true,
+            topOffset: pullDownOffset,
+            onRefresh: function () {
+                if (pullDownEl.className.match('loading')) {
+                    pullDownEl.className = '';
+                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
+                } else if (pullUpEl.className.match('loading')) {
+                    pullUpEl.className = '';
+                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+                }
+            },
+            onScrollMove: function () {
+                if (this.y > 5 && !pullDownEl.className.match('flip')) {
+                    pullDownEl.className = 'flip';
+                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '松手开始更新...';
+                    this.minScrollY = 0;
+                } else if (this.y < 5 && pullDownEl.className.match('flip')) {
+                    pullDownEl.className = '';
+                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
+                    this.minScrollY = -pullDownOffset;
+                } else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+                    pullUpEl.className = 'flip';
+                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '松手开始更新...';
+                    this.maxScrollY = this.maxScrollY;
+                } else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+                    pullUpEl.className = '';
+                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+                    this.maxScrollY = pullUpOffset;
+                }
+            },
+            onScrollEnd: function () {
+                if (pullDownEl.className.match('flip')) {
+                    pullDownEl.className = 'loading';
+                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';
+                    pullDownAction(); // Execute custom function (ajax call?)
+                } else if (pullUpEl.className.match('flip')) {
+                    pullUpEl.className = 'loading';
+                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
+                    pullUpAction(); // Execute custom function (ajax call?)
+                }
+            }
+        });
+
+        setTimeout(function () {
+            document.getElementById('wrapper').style.left = '0';
+        }, 800);
+    }
+
+    function pullDownAction() {
+        setTimeout(function () { // <-- Simulate network congestion, remove setTimeout from production!
+
+
+            $.ajax({
+                url: "http://localhost:3000/demo/demo.html",
+
+                success: function (data) {
+
+                    $(".score_list ul").append(data);
+                    console.log(data);
+                    myScroll.refresh(); // Remember to refresh when contents are loaded (ie: on ajax completion)
+
+                }
+            });
+
+
+
+        }, 1000); // <-- Simulate network congestion, remove setTimeout from production!
+    }
+
+    function pullUpAction() {
+
+        $.ajax({
+            url: "http://localhost:3000/demo/demo.html?page=[page]",
+
+            success: function (data) {
+                $(".score_list ul").append(data);
+                console.log(data);
+                myScroll.refresh(); // Remember to refresh when contents are loaded (ie: on ajax completion)
+            }
+
+        });
+
+        setTimeout(function () { // <-- Simulate network congestion, remove setTimeout from production!
+
+        }, 1000); // <-- Simulate network congestion, remove setTimeout from production!
+    }
+
+
+    document.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+    }, false);
+
+    document.addEventListener('DOMContentLoaded', function () {
+        setTimeout(loaded, 200);
+    }, false);
+
+
+</script>
+
+</body>
+</html>
